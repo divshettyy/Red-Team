@@ -167,7 +167,10 @@ class MasterOrchestrator:
             strategy_text = message.content[0].text
             strategy = json.loads(strategy_text)
             return strategy
-        except:
+        except (IndexError, json.JSONDecodeError, AttributeError) as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(f"Failed to parse orchestration strategy from Claude: {e}. Using fallback.")
             # Fallback strategy
             return {
                 "name": "Default Web Pentest",

@@ -344,9 +344,10 @@ def validate_poc(poc_code: str, finding: Dict[str, Any],
 
         # Execute the curl command
         try:
+            import shlex
+            args = shlex.split(poc_code)
             result = subprocess.run(
-                poc_code,
-                shell=True,
+                args,
                 capture_output=True,
                 text=True,
                 timeout=timeout,
@@ -370,8 +371,8 @@ def validate_poc(poc_code: str, finding: Dict[str, Any],
 
         try:
             result = subprocess.run(
-                poc_code,
-                shell=True,
+                ["bash", "-n"],
+                input=poc_code,
                 capture_output=True,
                 text=True,
                 timeout=timeout,

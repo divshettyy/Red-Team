@@ -216,6 +216,7 @@ CREATE TABLE IF NOT EXISTS artifacts (
 """
 
 _db_conn: Optional[sqlite3.Connection] = None
+_db_lock: 'threading.Lock' = None
 
 
 def init_db() -> sqlite3.Connection:
@@ -253,9 +254,12 @@ def init_db() -> sqlite3.Connection:
 
 def get_db() -> sqlite3.Connection:
     """Return the module-level singleton DB connection, initialising if needed."""
-    global _db_conn
-    if _db_conn is None:
-        _db_conn = init_db()
+    global _db_conn, _db_lock
+    if _db_lock is None:
+        _db_lock = threading.Lock()
+    with _db_lock:
+        if _db_conn is None:
+            _db_conn = init_db()
     return _db_conn
 
 
