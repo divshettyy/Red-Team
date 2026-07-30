@@ -914,9 +914,20 @@ def execute_technique(technique_id: str, target_url: str, params_list: List[str]
                       eng_id: str) -> Optional[Dict]:
     """
     Main dispatcher: given a technique_id, route to appropriate executor.
+    Supports Phase 3 (base) and Phase 4 (advanced) handlers.
     Returns finding dict if vuln found, None otherwise.
     """
+    # Check Phase 3 handlers first
     handler = EXECUTORS.get(technique_id)
+
+    # Fall back to Phase 4 handlers if not found
+    if not handler:
+        try:
+            from mod_technique_executors_phase4 import PHASE4_EXECUTORS
+            handler = PHASE4_EXECUTORS.get(technique_id)
+        except ImportError:
+            pass
+
     if not handler:
         print(f"[!] No executor for technique: {technique_id}")
         return None
