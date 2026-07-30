@@ -67,7 +67,7 @@ except (ImportError, AttributeError):
 # CONSTANTS
 # ---------------------------------------------------------------------------
 
-VERSION = "2.0.0"
+VERSION = "3.1.0"
 HAKUZA_DIR = Path.home() / ".hakuza"
 DB_PATH = HAKUZA_DIR / "hakuza.db"
 CONFIG_PATH = HAKUZA_DIR / "config.json"
@@ -8137,7 +8137,7 @@ import markdown2
 
 _TESTER_NAME = "Divith D Shetty"
 _TESTER_CREDS = "CEH · CRTP · CAISP | 4+ Years VAPT | Alvarez & Marsal"
-_HAKUZA_VERSION = "2.0.0"
+_HAKUZA_VERSION = "3.1.0"
 
 _SEV_HTML_COLORS = {
     "critical": "#f85149",
