@@ -12074,7 +12074,7 @@ def get_technique_summary(technique: Dict[str, Any]) -> str:
     return f"{technique.get('id'):25} {technique.get('name'):40} [{technique.get('severity', 'unknown').upper():8}]"
 
 
-def cmd_list_techniques(args) -> None:
+def cmd_list_techniques(args, console: Console) -> None:
     """List all loaded techniques with optional filtering."""
     techniques = load_techniques()
 
@@ -12107,7 +12107,7 @@ def cmd_list_techniques(args) -> None:
     console.print()
 
 
-def cmd_show_technique(args) -> None:
+def cmd_show_technique(args, console: Console) -> None:
     """Display detailed information about a specific technique."""
     technique = get_technique_by_id(args.technique_id)
 
@@ -12240,7 +12240,7 @@ def extract_poc_links(cve_id: str) -> List[str]:
     return links
 
 
-def cmd_poc_discover(args) -> None:
+def cmd_poc_discover(args, console: Console) -> None:
     """Discover PoC code for a given CVE."""
     cve_id = args.cve_id.upper()
 
@@ -12557,7 +12557,7 @@ def run_orchestration_loop(engagement_name: str, depth: int = 5, max_iterations:
     console.print(f"Total findings: {len(list_findings(engagement['id']))}")
 
 
-def cmd_orchestrate(args) -> None:
+def cmd_orchestrate(args, console: Console) -> None:
     """Run autonomous orchestration loop."""
     engagement_name = args.engagement or get_config_value("current_engagement")
 
