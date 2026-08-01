@@ -365,9 +365,22 @@ HAKUZA competes at the intersection of:
 
 HAKUZA is released under the MIT License. See LICENSE file for details.
 
+## 🤖 AI Red Teaming Framework Integration
+
+HAKUZA is fully aligned with industry-standard AI red teaming frameworks:
+
+- **NIST AI Risk Management Framework (AI RMF)** — GOVERN, MAP, MEASURE, MANAGE
+- **OWASP Top 10 for LLM Applications (2025)** — All 10 categories covered
+- **OWASP Top 10 for Agentic Applications (2026)** — ASI01–ASI10 mapped
+- **MITRE ATLAS** — Tactics + sub-techniques taxonomy
+- **CSA Agentic AI Red Teaming** — 7 agentic-specific risks
+- **Microsoft Agentic Failure-Mode Taxonomy v2.0** — Supply chain, goal hijack, inter-agent trust, visual attacks, context contamination, MCP abuse, capability disclosure
+
+**Comprehensive Guide:** See [AI-RED-TEAMING-METHODOLOGY.md](AI-RED-TEAMING-METHODOLOGY.md)
+
 ---
 
 **HAKUZA: Autonomous Red Team Orchestration Platform**  
 *Building the most capable penetration testing tool on the planet.*
 
-**v7.0+ Security-Hardened. Production-Ready. Market-Leading.** 🏆
+**v7.0+ Security-Hardened. AI-Aligned. Production-Ready. Market-Leading.** 🏆

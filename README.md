@@ -21,9 +21,10 @@ python3 hakuza.py master-orchestrate --autonomous
 | **Speed** | <10 min end-to-end, <500ms startup |
 | **Scale** | 50+ hosts, 100+ services, 150+ vuln types |
 | **Accuracy** | 90%+ validated PoC success rate |
-| **Techniques** | 34+ ATT&CK-mapped, extensible via YAML |
+| **Techniques** | 34+ ATT&CK/ATLAS-mapped, extensible via YAML |
 | **Intelligence** | Attack-surface graph with risk scoring |
 | **Output** | HTML/JSON reports, findings DB, curl/Python PoCs |
+| **Framework Aligned** | NIST AI RMF, OWASP LLM/Agentic, MITRE ATLAS, CSA, Microsoft |
 
 ## 📊 By The Numbers
 
@@ -61,6 +62,7 @@ python3 hakuza.py master-orchestrate --autonomous
 ## 📚 Documentation
 
 - **[ABOUT.md](ABOUT.md)** — Complete project overview, architecture, roadmap
+- **[AI-RED-TEAMING-METHODOLOGY.md](AI-RED-TEAMING-METHODOLOGY.md)** — Industry-standard frameworks (NIST, OWASP, MITRE ATLAS, Microsoft) + HAKUZA integration
 - **[ACTIVE_ENGINE.md](docs/ACTIVE_ENGINE.md)** — 44+ vulnerability classes with implementation details
 - **[TESTLAB_NOTES.md](docs/TESTLAB_NOTES.md)** — Practice range with 23+ vulnerable endpoints
 - **[SECURITY_AUDIT_REPORT.md](HAKUZA_SECURITY_AUDIT_REPORT.md)** — Vulnerability audit & fixes
