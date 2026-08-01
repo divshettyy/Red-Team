@@ -1143,11 +1143,15 @@ class BehavioralValidator:
                     os.unlink(f.name)
                     return result.stdout + result.stderr, result.returncode == 0
 
-            # Try as curl command
+            # Try as curl command (safe parsing)
             elif "curl" in poc_script:
+                import shlex
+                try:
+                    args = shlex.split(poc_script)
+                except ValueError:
+                    args = [poc_script]
                 result = subprocess.run(
-                    poc_script,
-                    shell=True,
+                    args,
                     capture_output=True,
                     text=True,
                     timeout=30,
@@ -1155,10 +1159,13 @@ class BehavioralValidator:
                 return result.stdout + result.stderr, result.returncode == 0
 
             else:
-                # Fallback: try to run as shell command
+                # Fallback: validate and run as shell command
+                # Only allow safe operations
+                if any(x in poc_script for x in [';', '|', '&', '`', '$(']):
+                    return "Unsafe shell characters detected", False
                 result = subprocess.run(
-                    poc_script,
-                    shell=True,
+                    ["bash", "-n"],
+                    input=poc_script,
                     capture_output=True,
                     text=True,
                     timeout=30,

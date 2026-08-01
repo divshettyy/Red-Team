@@ -585,10 +585,14 @@ class LatestUACBypass:
             else:
                 payload = command
 
-            # Execute with error handling
+            # Execute with error handling (safe parsing)
+            import shlex
+            try:
+                args = shlex.split(payload) if isinstance(payload, str) else payload
+            except ValueError:
+                args = payload if isinstance(payload, list) else [payload]
             result = subprocess.run(
-                payload,
-                shell=True,
+                args,
                 capture_output=True,
                 timeout=30,
             )

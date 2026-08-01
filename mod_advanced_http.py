@@ -48,6 +48,17 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.text import Text
 
 # ---------------------------------------------------------------------------
+# SSL/TLS Configuration (CVE mitigation)
+# ---------------------------------------------------------------------------
+
+def _get_ssl_verify():
+    """Get SSL verification setting from environment. Defaults to True for security."""
+    verify = os.getenv('HAKUZA_VERIFY_SSL', 'true').lower()
+    return verify != 'false'
+
+SSL_VERIFY = _get_ssl_verify()
+
+# ---------------------------------------------------------------------------
 # Lazy HAKUZA imports (prevent circular deps)
 # ---------------------------------------------------------------------------
 
@@ -400,7 +411,7 @@ class CachePoisoningTester:
                 self.target_url,
                 timeout=self.timeout,
                 allow_redirects=False,
-                verify=False
+                verify=SSL_VERIFY
             )
 
             # Second request with poisoning header
@@ -409,7 +420,7 @@ class CachePoisoningTester:
                 headers={"X-Forwarded-Host": "attacker.com"},
                 timeout=self.timeout,
                 allow_redirects=False,
-                verify=False
+                verify=SSL_VERIFY
             )
 
             # Check if response differs (indicates unkeyed header reflection)
@@ -448,8 +459,8 @@ class CachePoisoningTester:
             # URL with extra parameter that might be ignored by cache
             url_with_param = f"{self.target_url}{'?' if '?' not in self.target_url else '&'}utm_source=attacker"
 
-            resp1 = requests.get(self.target_url, timeout=self.timeout, verify=False)
-            resp2 = requests.get(url_with_param, timeout=self.timeout, verify=False)
+            resp1 = requests.get(self.target_url, timeout=self.timeout, verify=SSL_VERIFY)
+            resp2 = requests.get(url_with_param, timeout=self.timeout, verify=SSL_VERIFY)
 
             # If responses are identical despite different URLs, parameter might be ignored
             if resp1.text == resp2.text and resp1.status_code == resp2.status_code:
@@ -494,7 +505,7 @@ import requests
 url = "{self.target_url}"
 headers_poison = {{"X-Forwarded-Host": "attacker.com"}}
 
-resp = requests.get(url, headers=headers_poison, verify=False)
+resp = requests.get(url, headers=headers_poison, verify=SSL_VERIFY)
 if "attacker.com" in resp.text:
     print("VULNERABLE: Unkeyed header reflected in response")
 else:
@@ -520,8 +531,8 @@ url = "{self.target_url}"
 parsed = urlparse(url)
 sep = "&" if "?" in url else "?"
 
-resp1 = requests.get(url, verify=False)
-resp2 = requests.get(f"{{url}}{{sep}}utm_source=attacker", verify=False)
+resp1 = requests.get(url, verify=SSL_VERIFY)
+resp2 = requests.get(f"{{url}}{{sep}}utm_source=attacker", verify=SSL_VERIFY)
 
 hash1 = hashlib.md5(resp1.text.encode()).hexdigest()
 hash2 = hashlib.md5(resp2.text.encode()).hexdigest()
@@ -561,7 +572,7 @@ class HTTPSplittingTester:
             for payload in payloads:
                 url = f"{self.target_url}{'?' if '?' not in self.target_url else '&'}user_input={payload}"
                 try:
-                    resp = requests.get(url, timeout=self.timeout, verify=False)
+                    resp = requests.get(url, timeout=self.timeout, verify=SSL_VERIFY)
                     # Check if injected headers appear in response
                     if b"admin=true" in resp.content or b"Injected" in resp.content:
                         finding = HTTPFinding(
@@ -596,7 +607,7 @@ import requests
 
 url = "{self.target_url}"
 payload = "{payload}"
-resp = requests.get(f"{{url}}?input={{payload}}", verify=False)
+resp = requests.get(f"{{url}}?input={{payload}}", verify=SSL_VERIFY)
 
 if b"Injected" in resp.content or b"admin=" in resp.content:
     print("VULNERABLE: CRLF Injection detected")

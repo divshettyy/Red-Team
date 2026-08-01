@@ -431,8 +431,11 @@ class ExploitDBMonitor:
             with urllib.request.urlopen(EXPLOITDB_RSS, timeout=15) as response:
                 feed_data = response.read()
 
-            # Simple XML parsing for exploit-db RSS
-            import xml.etree.ElementTree as ET
+            # Safe XML parsing for exploit-db RSS (XXE protection)
+            try:
+                from defusedxml import ElementTree as ET
+            except ImportError:
+                import xml.etree.ElementTree as ET
             root = ET.fromstring(feed_data)
 
             for item in root.findall(".//item")[:50]:  # Last 50 exploits
