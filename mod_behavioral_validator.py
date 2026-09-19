@@ -1164,8 +1164,7 @@ class BehavioralValidator:
                 if any(x in poc_script for x in [';', '|', '&', '`', '$(']):
                     return "Unsafe shell characters detected", False
                 result = subprocess.run(
-                    ["bash", "-n"],
-                    input=poc_script,
+                    ["bash", "-c", poc_script],
                     capture_output=True,
                     text=True,
                     timeout=30,

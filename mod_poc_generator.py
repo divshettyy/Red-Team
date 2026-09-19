@@ -372,8 +372,7 @@ def validate_poc(poc_code: str, finding: Dict[str, Any],
 
         try:
             result = subprocess.run(
-                ["bash", "-n"],
-                input=poc_code,
+                ["bash", "-c", poc_code],
                 capture_output=True,
                 text=True,
                 timeout=timeout,
