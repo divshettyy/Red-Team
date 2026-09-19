@@ -63,6 +63,7 @@ def load_historical_engagements(db_path: str) -> List[Dict]:
         rows = cursor.fetchall()
 
         for eng_row in rows:
+            eng_row = dict(eng_row)  # sqlite3.Row has no .get(); use a plain dict
             eng_id = eng_row["id"]
             eng_dict = {
                 "id": eng_id,
@@ -81,6 +82,7 @@ def load_historical_engagements(db_path: str) -> List[Dict]:
             findings_rows = cursor.fetchall()
 
             for f_row in findings_rows:
+                f_row = dict(f_row)  # sqlite3.Row has no .get(); use a plain dict
                 finding = {
                     "id": f_row["id"],
                     "title": f_row["title"],
