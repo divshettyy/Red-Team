@@ -540,10 +540,9 @@ class FridaRuntimeAnalyzer:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                timeout=30
             )
 
-            stdout, stderr = proc.communicate()
+            stdout, stderr = proc.communicate(timeout=30)
             result['output'] = stdout
             result['error'] = stderr
             result['success'] = proc.returncode == 0
