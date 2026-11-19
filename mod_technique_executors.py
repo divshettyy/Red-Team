@@ -342,7 +342,7 @@ def execute_ssti_injection(target_url: str, params_list: List[str],
                 continue
 
             # Check if template expression was evaluated (7*7 = 49)
-            if "49" in resp.text or str(eval(payload.replace("${", "").replace("}}", ""))) in resp.text:
+            if "49" in resp.text:
                 curl = f'curl "{test_url}"'
                 return _persist_finding(
                     eng_id, technique_id,

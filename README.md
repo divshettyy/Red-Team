@@ -5,8 +5,8 @@
 ## ⚡ Quick Start
 
 ```bash
-git clone https://github.com/divshettyy/hakuza-redteam.git
-cd hakuza-redteam
+git clone https://github.com/divshettyy/Red-Team.git
+cd Red-Team
 pip install -r requirements.txt
 python3 hakuza.py master-orchestrate --autonomous
 ```
@@ -31,7 +31,7 @@ python3 hakuza.py master-orchestrate --autonomous
 - **25,000+** lines of production code
 - **7** orchestration phases (planning → exploitation → reporting)
 - **34** vulnerability techniques (web/API/auth/infra)
-- **1500+** tests (95%+ coverage)
+- **249** tests
 - **300+** findings/second throughput
 - **50%+** performance optimized
 - **4** critical/high security vulnerabilities **fixed** ✅
@@ -63,9 +63,8 @@ python3 hakuza.py master-orchestrate --autonomous
 
 - **[ABOUT.md](ABOUT.md)** — Complete project overview, architecture, roadmap
 - **[AI-RED-TEAMING-METHODOLOGY.md](AI-RED-TEAMING-METHODOLOGY.md)** — Industry-standard frameworks (NIST, OWASP, MITRE ATLAS, Microsoft) + HAKUZA integration
-- **[ACTIVE_ENGINE.md](docs/ACTIVE_ENGINE.md)** — 44+ vulnerability classes with implementation details
-- **[TESTLAB_NOTES.md](docs/TESTLAB_NOTES.md)** — Practice range with 23+ vulnerable endpoints
-- **[SECURITY_AUDIT_REPORT.md](HAKUZA_SECURITY_AUDIT_REPORT.md)** — Vulnerability audit & fixes
+- **[ABOUT.md](ABOUT.md)** — Architecture details and vulnerability classes
+- **[AI-RED-TEAMING-METHODOLOGY.md](AI-RED-TEAMING-METHODOLOGY.md)** — Security audit & fixes
 
 ## 🚀 Usage
 
@@ -130,5 +129,5 @@ MIT — See LICENSE
 
 **v7.0+ Security-Hardened. Ready for Enterprise.** 🔥
 
-🔗 GitHub: https://github.com/divshettyy/hakuza-redteam  
+🔗 GitHub: https://github.com/divshettyy/Red-Team  
 📧 Questions? Open an issue.
