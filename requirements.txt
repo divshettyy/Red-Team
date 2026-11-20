@@ -1,4 +1,4 @@
-anthropic>=0.105.0
+anthropic>=2.9.0
 rich>=13.9.0
 markdown2>=2.5.0
 pyyaml>=6.0        # HARD-required by mod_techniques.py (technique library loader)
